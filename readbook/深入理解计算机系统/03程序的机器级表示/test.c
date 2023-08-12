@@ -1,11 +1,12 @@
 /**
 * User: Qkj
 * Description: 
-* Date: 2023-08-11
-* Time: 17:34
+* Date: 2023-08-12
+* Time: 20:44
 */
-int main()
+int shift_left2_rightn(int x, int n)
 {
-
-  return 0;
+  x <<= 2;
+  x >>= n;
+  return x;
 }
