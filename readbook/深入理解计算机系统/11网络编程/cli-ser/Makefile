@@ -1,9 +1,9 @@
 .PHONY:all
-all:server client
+all:server client 
 
-server:echo_ser.c open_listenfd.c
+server:echo_ser.c ../open_fd/open_listenfd.c
 	gcc -o $@ $^
-client:echo_cli.c open_clientfd.c
+client:echo_cli.c ../open_fd/open_clientfd.c
 	gcc -o $@ $^
 
 .PHONY:clean

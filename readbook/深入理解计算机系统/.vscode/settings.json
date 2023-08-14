@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "open_clientfd.h": "c",
+    "string.h": "c"
+  }
+}
