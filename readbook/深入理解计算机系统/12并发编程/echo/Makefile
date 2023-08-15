@@ -1,10 +1,10 @@
 .PHONY:all
 all:myserver client 
 
-myserver:echo_ser.c ../open_fd/open_listenfd.c
-	gcc -o $@ $^
-client:echo_cli.c ../open_fd/open_clientfd.c
-	gcc -o $@ $^
+myserver:echo_ser.cc ../open_fd/open_listenfd.cc
+	g++ -o $@ $^ -lpthread
+client:echo_cli.cc ../open_fd/open_clientfd.cc
+	g++ -o $@ $^
 
 .PHONY:clean
 clean:
