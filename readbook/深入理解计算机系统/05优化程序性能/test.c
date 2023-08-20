@@ -109,3 +109,54 @@ void combine1(vec_ptr v, data_t *dest)
     *dest = *dest OP val;
   }
 }
+void combine2(vec_ptr v, data_t *dest)
+{
+  long int i = 0;
+  *dest = IDENT;
+  long int length = vec_length(v);
+
+  for(i = 0; i < length; i++)
+  {
+    data_t val;
+    get_vec_element(v, i, &val);
+    *dest = *dest OP val;
+  }
+}
+
+size_t my_strlen(const char* s)
+{
+  int length = 0;
+  while(*s != '\0')
+  {
+    ++s;
+    length++;
+  }
+  return length;
+}
+
+// 大写字母转换为 小写
+void lower1(char *s)
+{
+  int i = 0;
+  int len = my_strlen(s);
+  for(i = 0; i < len; i++)
+  {
+    if(s[i] >= 'A' && s[i] <= 'Z')
+      s[i] -= ('A' - 'a');
+  }
+}
+data_t* get_vec_start(vec_ptr v)
+{
+  return v->data;
+}
+void combine3(vec_ptr v, data_t *dest)
+{
+  long int i = 0;
+  long int length = vec_length(v);
+  data_t* data = get_vec_start(v);
+  *dest = IDENT;
+  for(i = 0; i < length; i++)
+  {
+    *dest = *dest OP data[i];
+  }
+}
