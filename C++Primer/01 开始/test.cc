@@ -4,11 +4,6 @@
 * Date: 2023-05-04
 * Time: 15:36
 */
-
-
-
-
-
 //#include <iostream>
 //#include <string>
 //#include <fstream>
@@ -31,8 +26,6 @@
 //}
 //
 
-
-
 //int main()
 //{
 //  std::string str;
@@ -41,13 +34,6 @@
 //  std::cout << str << std::endl;
 //  return 0;
 //}
-
-
-
-
-
-
-
 
 //#include <iostream>
 //
@@ -70,12 +56,6 @@
 //#include <cassert>
 //#include <iostream>
 
-
-
-
-
-
-
 //int main()
 //{
 // 
@@ -84,8 +64,6 @@
 //  assert(0);
 //  return 0;
 //}
-
-
 
 //int main()
 //{
@@ -104,3 +82,14 @@
 ////#endif
 //  return 0;
 //}
+
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	cout << "hello" << endl;
+
+	return 0;
+}
