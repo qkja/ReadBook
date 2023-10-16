@@ -87,9 +87,35 @@
 #include <iostream>
 using namespace std;
 
+//int main()
+//{
+//	cout << "hello" << endl;
+//
+//	return 0;
+//}
+//int main()
+//{
+//	const int P = 10;
+//	int* pp = &P;
+//
+//	return 0;
+//}
+
+enum Points
+{ 
+	point2d = 2, 
+	point2w, 
+	point3d = 3, 
+	point3w 
+};
+
 int main()
 {
-	cout << "hello" << endl;
-
+	Points s = point2d;
+	std::cout << "hello" << std::endl;
+	std::cout << point2d << std::endl;
+	std::cout << point2w << std::endl;
+	std::cout << point3d << std::endl;
 	return 0;
 }
+
