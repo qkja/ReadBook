@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <unordered_map>
+
 //class min_stack
 //{
 //public:
@@ -401,3 +403,242 @@
 //	PRINT(97);
 //	return 0;
 //}
+
+
+//
+//void adjust_down(std::vector<int>& v, int root, int size)
+//{
+//	int parent = root;
+//	int child = 2 * parent + 1;// 左孩子
+//
+//	while (child < size)
+//	{
+//		// 寻找左右孩子较大值
+//		if (child + 1 < size && v[child + 1] > v[child])
+//		{
+//			child++;
+//		}
+//		if (v[parent] < v[child])
+//		{
+//			std::swap(v[parent], v[child]);
+//		}
+//		else
+//		{
+//			break;
+//		}
+//		parent = child;
+//		child = 2 * parent + 1;
+//	}
+//}
+//
+//void build_a_large_root_heap(std::vector<int>& v)
+//{
+//	for (int parent = (v.size() - 1 - 1) / 2; parent >= 0; --parent)
+//	{
+//		adjust_down(v, parent, v.size());
+//	}
+//}
+//
+//void heap_sort(std::vector<int>& v)
+//{
+//	build_a_large_root_heap(v); // 建堆
+//	for (int i = v.size() - 1; i > 0; i--)
+//	{
+//		// 1. 换位置
+//		std::swap(v[0], v[i]);
+//		// 2. 向下调整, 注意,我们需要调整数组的大小
+//		adjust_down(v, 0, i);
+//	}
+//}
+//
+//int main()
+//{
+//	std::vector<int> v = { 4, 2, 7, 8, 5, 1, 0, 6 };
+//	heap_sort(v);
+//	for (int i = 0; i < v.size(); i++)
+//	{
+//		printf("%d ", v[i]);
+//	}
+//	return 0;
+//}
+
+//struct Node
+//{
+//	int _val;
+//	struct Node* _left;
+//	struct Node* _right;
+//	Node()
+//	{
+//		_val = 0;
+//		_left = nullptr;
+//		_right = nullptr;
+//	}
+//};
+//
+//int main()
+//{
+//	std::vector<int> v;
+//	Node* pRoot = new Node[v.size()];
+//	for (int i = 0; i < v.size(); i++)
+//	{
+//		(pRoot + i)->_val = v[i];
+//	}
+//	std::stack<Node*> s;
+//	std::unordered_map<Node*, Node*> l_big_map;
+//	std::unordered_map<Node*, Node*> r_big_map;
+//	// 保存左侧的比val大的
+//	for (int i = 0; i < v.size(); i++)
+//	{
+//		Node* node = pRoot + i;
+//		while (!s.empty() && s.top()->_val < node->_val)
+//		{
+//			pop_stack_set_map(s, l_big_map);
+//		}
+//		s.push(node);
+//	}
+//	// 这里是
+//	while (!s.empty())
+//	{
+//		pop_stack_set_map(s, l_big_map);
+//	}
+//
+//	for (int i = v.size() - 1; i >= 0; --i)
+//	{
+//		Node* node = pRoot + i;
+//		while (!s.empty() && s.top()->_val < node->_val)
+//		{
+//			pop_stack_set_map(s, r_big_map);
+//		}
+//		s.push(node);
+//	}
+//
+//	while (!s.empty())
+//	{
+//		pop_stack_set_map(s, r_big_map);
+//	}
+//
+//	Node* root = nullptr;
+//	for (int i = 0; i < v.size(); ++i)
+//	{
+//		Node* node = pRoot + i;
+//		Node* left = l_big_map[node];// node 一定有
+//		Node* right = r_big_map[node];// node 一定有
+//		if (left == nullptr && right == nullptr)
+//		{
+//			root = node;
+//		}
+//		else if (left == nullptr)
+//		{
+//			// 左侧没有比val大的,右侧有
+//			if (right->_left == nullptr)
+//				right->_left = node;
+//			else
+//				right->_right = node;
+//		}
+//		else if (right == nullptr)
+//		{
+//			if (left->_left == nullptr)
+//				left->_left = node;
+//			else
+//				left->_right = node;
+//		}
+//		else
+//		{
+//			Node* parent = left->_val < right->_val ? left : right;
+//
+//			if (parent->_left == nullptr)
+//				parent->_left = node;
+//			else
+//				parent->_right = node;
+//		}
+//
+//	}
+//
+//	delete[] pRoot;
+//	return 0;
+//}
+//
+//void pop_stack_set_map(std::stack<Node*>& s, std::unordered_map<Node*, Node*>& m)
+//{
+//	Node* node = s.top();
+//	s.pop();
+//	if (s.empty())
+//	{
+//		m[node] = nullptr;
+//	}
+//	else
+//	{
+//		m[node] = s.top();
+//	}
+//}
+//struct A
+//{
+//	~A()
+//	{
+//		std::cout << "1" << std::endl;
+//	}
+//};
+//A* func()
+//{
+//
+//	return new A[3];
+//}
+//int main()
+//{
+//	A* p = func();
+//	delete[] p;
+//	return 0;
+//}
+
+//class Solution {
+//public:
+//	int maxArea(vector<int>& height) {
+//		int n = height.size();
+//		int ret = 0;
+//		// 两层 for 枚举出所有可能出现的情况
+//		for (int i = 0; i < n; i++) {
+//			for (int j = i + 1; j < n; j++) {
+//				// 计算容积，找出最大的那一个
+//				ret = max(ret, min(height[i], height[j]) * (j - i));
+//			}
+//		}
+//		return ret;
+//	}
+//};
+//int max_rec_from_bottom(const std::vector<int>& height)
+//{
+//	int left = 0, right = height.size() - 1, ret = 0;
+//	while (left < right)
+//	{
+//		int v = std::min(height[left], height[right]) * (right - left);
+//		ret = std::max(ret, v);
+//		// 移动指针
+//		if (height[left] < height[right]) left++;
+//		else right--;
+//	}
+//	return ret;
+//}
+//int max_rec_size(const std::vector<std::vector<int>>& v)
+//{
+//	if (v.empty())
+//		return 0;
+//	int maxLen = 0;
+//	std::vector<int> ret(v.back().size(), 0);
+//	for (int i = 0; i < v.size(); i++)
+//	{
+//		for (int j = 0; j < v[i].size(); j++)
+//		{
+//			ret[j] = v[i][j] == 0 ? 0 : ret[j] + 1;
+//		}
+//		maxLen = std::max(maxLen, max_rec_from_bottom(ret));
+//	}
+//	return maxLen;
+//}
+//
+//int main()
+//{
+//	std::vector<std::vector<int>> v = { {1,0,1,1}, {1,1,1,1}, {1,1,1,0}};
+//	std::cout << max_rec_size(v) << std::endl;
+//	return 0;
+//}
+
